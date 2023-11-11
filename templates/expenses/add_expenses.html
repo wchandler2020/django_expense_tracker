@@ -1,3 +1,42 @@
 {% extends "base.html" %}
-
-<h1>Add A New Expense</h1>
+{% block content %}
+<div class="mt-5 container">
+    <nav aria-label="breadcrump">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Expenses</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+        </ol>
+    </nav>
+    <div class="card rounded">
+        
+    <div class="card-body">
+        
+        <form action="{% url 'add-expenses' %}" method="post">
+        {% csrf_token %}
+        {% include 'partials/_messages.html' %}
+            <div class="form-group">
+                <label for="">Amount</label>
+                <input type="number" class="form-control rounded" name='amount' value="{{values.amount}}">
+            </div>
+            <div class="form-group">
+                <label for="">Expense Description</label>
+                <input type="text" class="form-control rounded" name='description' value="{{values.description}}">
+            </div>
+            <div class="form-group">
+                <label for="">Category</label>
+                <select name="category" class="form-control rounded">
+                    {% for category in categories  %}
+                        <option name="category" value="{{category.name}}">{{category}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-group-append">
+                <label for="">Expense Date</label>
+                <input type="date" class="form-control rounded" name='expense_date'>
+            </div>
+            <input type="submit" class="btn btn-outline-primary btn-block rounded" value="Add Expense">
+        </form>
+    </div>
+    </div> 
+</div>
+{% endblock %}

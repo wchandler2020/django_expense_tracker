@@ -1,5 +1,6 @@
+
 {% if messages %}
-<div class="messages">
+<div class="messages mt-5">
     {% for message in messages %}
     <div{% if message.tags %} class="alert rounded alert-sm alert-{{ message.tags }}"{% endif %}>
         {{ message }}

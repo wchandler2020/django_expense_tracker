@@ -10,31 +10,45 @@
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-
+    {% comment %} font {% endcomment %}
+    <script src="https://kit.fontawesome.com/678db39ab5.js" crossorigin="anonymous"></script>
     <!-- Custom styles for this template -->
     <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
     <link href="{% static 'css/main.css'%}" rel="stylesheet" />
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Expense Tracker</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'expenses' %}" 
+      style="font-weight: bold; font-size: 20px;"
+      >Expense Tracker</a>
 
       <ul
         class="navbar-nav px-3"
-        style="display: flex; flex-direction: row; align-items: center;"
+        style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin: auto 0;"
       >
         <li class="nav-item text-nowrap">
           <span class="nav-link" href="">
           </span>
         </li>
+        <li class="nav-item text-nowrap mt-3 ml-2"
+        style="display: flex; align-items: center; margin: auto 0;"
+        >
+          <a class='nav-link'
+          style="color: #fff; font-weight: 600; font-size: 14px"
+          >
+            {{request.user.username}}
+          </a>
+        </li>
 
         <li class="nav-item text-nowrap mt-3 ml-2">
-          <form action="" method="POST">
+          <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
+            <!-- <a href="" class="text text-capitalize btn btn-outline-primary" type="submit">Sign out</a> -->
             <input
-              class="text text-capitalize"
+              class="text text-capitalize btn btn-outline-primary rounded"
               type="submit"
               value="Sign out"
+              
             />
           </form>
         </li>

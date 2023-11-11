@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="align-middle text-center text-uppercase font-weight-light py-3">Preferred Currency</h1>
+    <hr>
+    
+    {% include 'partials/_messages.html' %}
+    
+    <form action="{% url 'preferences' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+            <select name="currency" class="custom-select rounded mr-2" id="floatingSelect" aria-label="Floating label select example">
+                {% if userprefences.currency %}
+                <option selected value='{{userprefences.currency }}'>{{userprefences.currency }}</option>
+                {% endif %}
+                
+                {% for currency in currencies %}
+                <option name='currency' value="{{currency.key}} - {{currency.value}}">{{currency.key}} - {{currency.value}}</option>
+                {% endfor %}
+            </select>
+            <div class="input-group-append">
+                <input class="btn btn-outline-primary rounded" type="submit" value="Select"/>
+            </div>
+        </div>
+    </form>
+    
+</div>
+
+{% endblock %}

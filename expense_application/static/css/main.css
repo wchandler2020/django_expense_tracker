@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap');
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+.messages{
+  transition: all 0.5s ease-out;
+  width: 100%;
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -20,4 +31,14 @@
 
 .showPasswordToggle:hover {
   transform: scale(1.1);
+}
+
+.top-bar{
+  background-color: blue !important;
+}
+
+.pagination_container_lower{
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center;
 }

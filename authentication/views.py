@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
+from django.contrib import auth
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from validate_email import validate_email
@@ -105,3 +106,30 @@ class VerificationView(View):
 class LoginView(View):
     def get(self, request):
         return render(request, 'authentication/login.html')
+    
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password'] 
+        
+        if username and password:
+            user=auth.authenticate(username = username, password=password)
+            
+            if user:
+                if user.is_active:
+                    auth.login(request, user)
+                    messages.success(request, f'Welcome back, {user.username}!')
+                    return redirect('expenses')
+                messages.error(request, 'Your account has not been activated, please check your email.')
+                return render(request, 'authentication/login.html')
+            messages.error(request, 'Invalid login credentials, please recheck your login and password.')
+            return render(request, 'authentication/login.html')
+        
+        messages.error(request, 'Please complete all fields.')
+        return render(request, 'authentication/login.html')
+    
+
+class LogoutView(View):
+    def post(self, request):
+        auth.logout(request)
+        messages.success(request, f'Thank you for stopping by, GoodBye.')
+        return redirect('login')

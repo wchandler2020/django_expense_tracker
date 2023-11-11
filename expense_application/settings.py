@@ -34,6 +34,7 @@ DJANGO_APPS = [
 USER_APPS = [
     'expenses.apps.ExpensesConfig',
     'authentication.apps.AuthenticationConfig',
+    'userprefences.apps.UserprefencesConfig',
 ]
 
 INSTALLED_APPS = THIRD_PARTY_APPS + USER_APPS  +  DJANGO_APPS
